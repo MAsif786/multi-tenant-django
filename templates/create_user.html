@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>{{tenant|default:'Home'}}</title>
+    </head>
+    <body>
+        <h1>{{tenant|default:'Home'}}</h1>
+        <p>{{tenant|default:'Home'}} Tenant</p>
+        <p>DB: {{db}}</p>
+        <form action="{% url 'save_user' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="email" placeholder="Email">
+            <input type="text" name="username" placeholder="Username">
+            <input type="text" name="password" placeholder="Password">
+            <input type="submit" value="Create User">
+        </form>
+        <table border="1" width="100%">
+            <tr>
+                <th>Email</th>
+                <th>Username</th>
+                <th>Action</th>
+            </tr>
+            {% for user in users %}
+            <tr>
+                <td>{{user.email}}</td>
+                <td>{{user.username}}</td>
+                <td><button>Delete</button></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
